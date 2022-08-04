@@ -213,20 +213,22 @@ AS
 	WHERE 
 		continents.continent_code IS NOT NULL
 )
+, running_total_rank
+AS
+(
 --creating temptable ranking each country per continent starting from countries where running total of gdp_per_capita meets or exceeds $70,000.00
-SELECT
-	continent_code
-	, country_code
-	, country_name
-	, gdp_per_capita
-	, running_total_gdp_per_capita
-	, RANK() OVER(PARTITION BY continent_code ORDER BY running) as [rank]
-INTO 
-	running_total_rank
-FROM 
-	running_total
-where 
-	running > 69999.99
+	SELECT
+		continent_code
+		, country_code
+		, country_name
+		, gdp_per_capita
+		, running_total_gdp_per_capita
+		, RANK() OVER(PARTITION BY continent_code ORDER BY running) as [rank]
+	FROM 
+		running_total
+	where 
+		running > 69999.99
+)
 -- returning only the first record from the ordered list
 SELECT * FROM running_total_rank WHERE rank = 1
 
