@@ -96,7 +96,8 @@ AS
 		, [Europe]
 		, [South America]
 		, [North America]
-		, [Oceania] 
+		, [Oceania]
+		, [Africa]
 		, [Antarctica] -- Antarctica is null so it's not included in the total column
 		, ([Asia] + [Europe] + [South America] + [North America] + [Oceania] + [Africa]) as total
 	FROM
@@ -124,7 +125,7 @@ AS
 SELECT
 	CONCAT(CAST(([Asia] / total) * 100 as NUMERIC(10,2)), '%') as Asia
 	, CONCAT(CAST(([Europe] / total) * 100 as NUMERIC(10,2)), '%') as Europe
-	, CONCAT(CAST((([South America] + [North America] + [Oceania]) / total) * 100 as NUMERIC(10,2)), '%') as [Rest Of The World]
+	, CONCAT(CAST((([South America] + [North America] + [Oceania] + [Africa]) / total) * 100 as NUMERIC(10,2)), '%') as [Rest Of The World]
 FROM continetsGdp
 
 
