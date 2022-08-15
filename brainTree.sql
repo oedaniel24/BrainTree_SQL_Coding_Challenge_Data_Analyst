@@ -98,7 +98,7 @@ AS
 		, [North America]
 		, [Oceania] 
 		, [Antarctica] -- Antarctica is null so it's not included in the total column
-		, ([Asia] + [Europe] + [South America] + [North America] + [Oceania]) as total
+		, ([Asia] + [Europe] + [South America] + [North America] + [Oceania] + [Africa]) as total
 	FROM
 	-- derived table
 		(
@@ -117,7 +117,7 @@ AS
 	PIVOT
 	(
 		SUM(gdp_per_capita)
-		FOR [continent_name] IN ([Asia], [Europe], [South America], [North America], [Oceania], [Antarctica])
+		FOR [continent_name] IN ([Asia], [Europe], [South America], [North America], [Oceania], [Antarctica], [Africa])
 	) AS Pvt
 )
 -- selecting asia and europe and grouping other continents as rest of the world
